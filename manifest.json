@@ -1,0 +1,11 @@
+{
+    "display_name": "Story Goals",
+    "loading_order": 100,
+    "requires": [],
+    "optional": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "Wani",
+    "version": "0.1.0",
+    "homePage": "https://github.com/Wanichka/sillytavern-story-goals"
+}
