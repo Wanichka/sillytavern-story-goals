@@ -1319,7 +1319,7 @@ function createUi() {
             <div id="sg-header-actions">
                 <button type="button" id="sg-add"><i class="fa-solid fa-plus"></i></button>
                 <button type="button" id="sg-settings-toggle"><i class="fa-solid fa-gear"></i></button>
-                <button type="button" id="sg-close">×</button>
+                <button type="button" id="sg-close"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
         <div id="sg-searchbar">
