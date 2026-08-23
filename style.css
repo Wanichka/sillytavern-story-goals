@@ -118,9 +118,13 @@
     background: color-mix(in srgb, var(--sg-layer-2), var(--sg-accent) 11%);
 }
 
-#sg-close {
-    font-size: 16px !important;
-    line-height: 1;
+/* fa-xmark carries its ink on the diagonals, so at an equal font-size it reads
+   a size smaller than fa-plus or fa-gear standing next to it. One optical step
+   up and the three header glyphs finally look like a set. The same correction
+   applies to the delete crosses on the cards and the steps. */
+#sg-close i,
+.sg-icon i.fa-xmark {
+    font-size: 1.18em;
 }
 
 /* -------------------------------- search -------------------------------- */
