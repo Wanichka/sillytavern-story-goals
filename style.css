@@ -620,3 +620,34 @@
         display: none;
     }
 }
+
+/* Optional Roleplay Tools dock; standalone styles remain unchanged. */
+#rpt-shell #sg-panel[data-rpt-docked] {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    z-index: auto !important;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+#rpt-shell #sg-panel[data-rpt-docked] #sg-header {
+    cursor: default;
+    touch-action: auto !important;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 7px 8px;
+}
+#rpt-shell #sg-brand { flex: 1 1 150px; flex-wrap: wrap; gap: 5px; }
+#rpt-shell #sg-title { font-size: 15px; }
+#rpt-shell #sg-header-actions { margin-left: auto; gap: 4px; }
+#rpt-shell #sg-body { min-height: 0; flex: 1 1 auto; overflow-y: auto; padding: 9px; }
+#rpt-shell #sg-close, #rpt-shell #sg-resize { display: none !important; }
+#rpt-shell .rpt-collapsed #sg-body,
+#rpt-shell .rpt-collapsed #sg-searchbar,
+#rpt-shell .rpt-collapsed #sg-actions { display: none !important; }
