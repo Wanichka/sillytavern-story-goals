@@ -183,11 +183,19 @@ function t(key, ...args) {
 // to the library because the library is item one. So three things have to be
 // said out loud — this is direction rather than instruction, the scene comes
 // first, and leaving a goal untouched is the correct behaviour, not a failure.
-const DEFAULT_PREAMBLE = [
+const LEGACY_DEFAULT_PREAMBLE = [
     'Long-term narrative goals for this story, set by the user. They describe where the story is eventually going, not what has to happen now.',
     'Reference material only. Never quote, list or restate this block in your reply, and never render it as an info block, a quest log or a status screen.',
     'Do not redirect the current scene toward a goal and do not make characters suddenly act on one. Progress happens only when the scene reaches it on its own terms.',
     'A goal may stay untouched for many messages, and that is correct. When the story does move toward one, move in small plausible steps that fit what is already happening.',
+].join('\n');
+
+const DEFAULT_PREAMBLE = [
+    LEGACY_DEFAULT_PREAMBLE,
+    'Pacing limit: in a single assistant reply, advance toward at most ONE unfinished subgoal (listed step) across the entire list, and complete no more than that one. For a goal without subgoals, treat the goal itself as one step. This is a ceiling, not a quota: completing no steps is normal, and one step may take many exchanges.',
+    'Use the chat history to recognize steps already reached, even if they remain unchecked; do not replay them. Follow the listed order for the remaining steps within a goal, and keep later steps as future context only.',
+    'Once a step is reached, stop before advancing toward the next one and leave room for the user to react, explore or choose what to do. Do not combine several steps into one scene, montage, time skip, summary, background description or chain of discoveries.',
+    'Even within one step, let meaningful actions and discoveries unfold interactively. Do not rush through several events merely because they share one bullet, and do not invent the user-controlled character\'s actions, decisions or reactions to move the goal forward.',
 ].join('\n');
 
 const DEFAULT_SETTINGS = {
@@ -209,7 +217,10 @@ function getSettings() {
         return {
             lang: STRINGS[parsed.lang] ? parsed.lang : DEFAULT_SETTINGS.lang,
             position: typeof parsed.position === 'string' ? parsed.position : DEFAULT_SETTINGS.position,
-            preamble: typeof parsed.preamble === 'string' ? parsed.preamble : DEFAULT_SETTINGS.preamble,
+            // Upgrade the old built-in text while preserving custom and empty preambles.
+            preamble: typeof parsed.preamble === 'string' && parsed.preamble !== LEGACY_DEFAULT_PREAMBLE
+                ? parsed.preamble
+                : DEFAULT_SETTINGS.preamble,
         };
     } catch (error) {
         console.error('[Story Goals] Failed to read settings:', error);
