@@ -190,12 +190,22 @@ const LEGACY_DEFAULT_PREAMBLE = [
     'A goal may stay untouched for many messages, and that is correct. When the story does move toward one, move in small plausible steps that fit what is already happening.',
 ].join('\n');
 
-const DEFAULT_PREAMBLE = [
+// Retained only to recognize and upgrade the previous built-in preamble.
+const PREVIOUS_DEFAULT_PREAMBLE = [
     LEGACY_DEFAULT_PREAMBLE,
     'Pacing limit: in a single assistant reply, advance toward at most ONE unfinished subgoal (listed step) across the entire list, and complete no more than that one. For a goal without subgoals, treat the goal itself as one step. This is a ceiling, not a quota: completing no steps is normal, and one step may take many exchanges.',
     'Use the chat history to recognize steps already reached, even if they remain unchecked; do not replay them. Follow the listed order for the remaining steps within a goal, and keep later steps as future context only.',
     'Once a step is reached, stop before advancing toward the next one and leave room for the user to react, explore or choose what to do. Do not combine several steps into one scene, montage, time skip, summary, background description or chain of discoveries.',
     'Even within one step, let meaningful actions and discoveries unfold interactively. Do not rush through several events merely because they share one bullet, and do not invent the user-controlled character\'s actions, decisions or reactions to move the goal forward.',
+].join('\n');
+
+const DEFAULT_PREAMBLE = [
+    LEGACY_DEFAULT_PREAMBLE,
+    "Do not use a subgoal as the plan for a single reply. A reply may only make progress toward it, leaving it unfinished. Beginning an event does not require narrating it to its conclusion in the same message.",
+    "Choose the pace according to the content of the subgoal: a simple action can be completed immediately; develop a complex or emotionally significant event gradually, over several exchanges with the user. Do not compress the whole event into one reply just to complete the subgoal, and do not artificially stretch simple actions.",
+    "The limit of at most ONE completed subgoal per assistant reply across the entire list is only an upper bound. It does not mean that every reply should complete a subgoal. For goals without subgoals, apply the same pacing rules to the goal itself.",
+    "Use the chat history to recognize steps already reached, even if they remain unchecked; do not replay them. Follow the listed order for the remaining steps within a goal, and keep later steps as future context only.",
+    "Do not invent the user-controlled character's actions, decisions or reactions to move the goal forward.",
 ].join('\n');
 
 const DEFAULT_SETTINGS = {
@@ -217,8 +227,10 @@ function getSettings() {
         return {
             lang: STRINGS[parsed.lang] ? parsed.lang : DEFAULT_SETTINGS.lang,
             position: typeof parsed.position === 'string' ? parsed.position : DEFAULT_SETTINGS.position,
-            // Upgrade the old built-in text while preserving custom and empty preambles.
-            preamble: typeof parsed.preamble === 'string' && parsed.preamble !== LEGACY_DEFAULT_PREAMBLE
+            // Upgrade built-in versions while preserving custom and empty preambles.
+            preamble: typeof parsed.preamble === 'string'
+                && parsed.preamble !== LEGACY_DEFAULT_PREAMBLE
+                && parsed.preamble !== PREVIOUS_DEFAULT_PREAMBLE
                 ? parsed.preamble
                 : DEFAULT_SETTINGS.preamble,
         };
