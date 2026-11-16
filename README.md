@@ -5,10 +5,10 @@ Where this story is going, written by hand, for one chat. You set a goal, the st
 Not a task manager. There is no auto-generation, no auto-check, no current task, no progress bar, and — the important part — **no second API request**. The Objective / SuperObjective family sends your chat back to the model under a service prompt to ask whether a task is done, without your preset and without your jailbreak, which is exactly what trips a content filter on an NSFW roleplay. Everything here is local. The only thing that ever reaches the model is the text block below.
 
 ```
-Найти способ попасть в закрытую секцию библиотеки
-  · достать разрешение у преподавателя
-  · выяснить график обходов
-Помириться с Дафной
+Find a way to get into the restricted section of the library
+· obtain permission from a professor
+· find out the schedule of patrols
+Make up with Daphne
 ```
 
 ## Using it
