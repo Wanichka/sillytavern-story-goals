@@ -11,6 +11,8 @@ Find a way to get into the restricted section of the library
 Make up with Daphne
 ```
 
+![Story Goals panel showing a goal and a step with their checkboxes](docs/screenshots/story-goals.png)
+
 ## Using it
 
 The compass button opens and closes the panel. Drag it anywhere — the position is remembered. The panel drags by its header; its height changes with the strip between the list and the footer (double-click the strip to reset).
